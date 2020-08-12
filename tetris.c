@@ -4,7 +4,7 @@
 #include <sys/time.h>
 #include <ncurses.h>
 
-#define ROWS 50
+#define ROWS 30
 #define COLS 15
 #define TRUE 1
 #define FALSE 0
@@ -175,6 +175,19 @@ void ManipulateCurrent(int action){
 			if(CheckPosition(temp))
 				RotateShape(current);
 			break;
+        case ' ':
+            while(1){ //move to bottom
+                temp.row++;
+                if(CheckPosition(temp))
+				    current.row++;
+                else {
+				    WriteToTable();
+				    Halleluyah_Baby(); //check full lines, after putting it down
+                    GetNewShape();
+                    break;
+			    }
+            }
+            break;
 	}
 	DeleteShape(temp);
 	PrintTable();
